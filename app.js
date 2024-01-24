@@ -16,6 +16,10 @@ app.use(express.json());
 app.use(cors());
 
 //* Rotas
+app.get("/", (req, res) => {
+    res.send("Servidor de autenticação funcionando!");
+});
+
 app.use("/", authRoute);
 
 //* Inicialização do servidor

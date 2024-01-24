@@ -17,7 +17,7 @@ app.use(cors());
 
 //* Rotas
 app.get("/", (req, res) => {
-    res.send("Servidor de autenticação funcionando!");
+    return res.json("Servidor de autenticação funcionando!");
 });
 
 app.use("/", authRoute);

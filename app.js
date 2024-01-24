@@ -19,6 +19,10 @@ app.use(cors());
 app.use("/", authRoute);
 
 //* Inicialização do servidor
-app.listen(PORT, () => {
+app.listen(PORT, (error) => {
+    if (error) {
+        console.error(error);
+        return;
+    }
     console.log(`Servidor incializado em: http://localhost:${PORT}`);
 });

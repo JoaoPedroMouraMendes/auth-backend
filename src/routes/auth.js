@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const authModel = require("../models/auth");
+const AuthModel = require("../models/auth");
+const UserDataModel = require("../models/userData");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -43,7 +44,7 @@ router.post("/auth/register", async (req, res) => {
     }
 
     // Verificação de nome único
-    const user = await authModel.findOne({ username: username }, "-password");
+    const user = await AuthModel.findOne({ username: username }, "-password");
     if (user) {
         return res.status(422).json({ msg: "Já tem outra pessoa com esse nome!", ok: false });
     }
@@ -54,7 +55,9 @@ router.post("/auth/register", async (req, res) => {
 
     try {
         // Cria o registro
-        await authModel.create({ username: username, password: passwarodHash });
+        const newUser = await AuthModel.create({ username: username, password: passwarodHash });
+        // Cria um espaço no db para usar a todo list
+        await UserDataModel.create({ user_id: newUser._id });
         res.status(201).json({ msg: "Conta criada com sucesso", ok: true });
     } catch (error) {
         console.error(`Erro ao tentar criar um novo registro: ${error}`);
@@ -71,7 +74,7 @@ router.post("/auth/login", async (req, res) => {
             .json({ msg: "O username ou password não foi definido", ok: false });
     }
     // Verifica se o nome de usuário existe
-    const user = await authModel.findOne({ username: username });
+    const user = await AuthModel.findOne({ username: username });
     if (!user) {
         return res.status(422).json({ msg: "Esse nome de usuário não existe", ok: false });
     }

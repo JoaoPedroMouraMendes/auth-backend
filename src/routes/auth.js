@@ -4,7 +4,7 @@ const authModel = require("../models/auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-router.get("/auth", (req, res) => {
+router.get("/auth/validation", (req, res) => {
     // Obtem o token enviado pelo front-end
     const authorization = req.headers["authorization"];
     if (!authorization) {
@@ -85,7 +85,7 @@ router.post("/auth/login", async (req, res) => {
     // Criação do token
     try {
         const SECRET = process.env.SECRET;
-        const token = jwt.sign({ id: user._id, }, SECRET);
+        const token = jwt.sign({ userId: user._id, }, SECRET);
         return res.status(200)
             .json({ msg: "Login realizado com sucesso", ok: true, token: token });
 

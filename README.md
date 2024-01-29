@@ -1,6 +1,6 @@
 # Back-End para Autenticações 📃
 
-Esse é um back-end responsável por criar registros de usuários usando um nome de usuário e uma senha.
+Esse é um back-end responsável por criar registros de usuários usando um nome de usuário e uma senha e criação de tarefas para Todo-List.
 
 ## Parte técnica 👩‍💻
 

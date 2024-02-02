@@ -2,6 +2,12 @@
 
 Esse é um back-end responsável por criar registros de usuários usando um nome de usuário e uma senha e criação de tarefas para Todo-List.
 
+### O que você pode fazer:
+
+- Criar um novo usuário 🌱
+- Conectar a sua conta 🚪
+- Salvar suas informações 💾
+
 ## Parte técnica 👩‍💻
 
 ### Banco de Dados
